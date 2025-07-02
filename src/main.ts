@@ -6,6 +6,9 @@ import { ValidationPipe, INestApplication } from '@nestjs/common';
 import { HttpErrorFilter } from './common/filters/http-error.filter';
 import { logger } from './common/logger';
 
+// Swagger
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+
 logger.info('🚀 Server startup — Observability enabled');
 
 async function bootstrap() {
@@ -15,23 +18,35 @@ async function bootstrap() {
 
     logger.info('🚀 Initializing application');
 
-  // Получаем ConfigService для чтения переменных окружения
-  const configService = app.get(ConfigService);
-  const port = configService.get<number>('PORT') || 3750;
+    // Настройка Swagger
+    const swaggerConfig = new DocumentBuilder()
+        .setTitle('NestJS Prototype API')
+        .setDescription('CRUD endpoints with Observability & Docker setup')
+        .setVersion('1.0')
+        .build();
+    const swaggerDoc = SwaggerModule.createDocument(app, swaggerConfig);
+    SwaggerModule.setup('api', app, swaggerDoc);
+    logger.info('📚 Swagger UI available at /api');
 
-  // Регистрируем LoggingInterceptor глобально
-  app.useGlobalInterceptors(new LoggingInterceptor());
+    // Получаем ConfigService для чтения переменных окружения
+    const configService = app.get(ConfigService);
+    const port = configService.get<number>('PORT') || 3750;
 
-  app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,              // удаляет лишние поля из тела запроса
-        forbidNonWhitelisted: true,   // выбрасывает ошибку при наличии лишних полей
-        transform: true,              // преобразует типы DTO (например, строки в числа)
-      }),
-  );
-  app.useGlobalFilters(new HttpErrorFilter());
+    // Регистрируем глобальные перехватчики, пайпы и фильтры
+    app.useGlobalInterceptors(new LoggingInterceptor());
+    app.useGlobalPipes(
+        new ValidationPipe({
+            whitelist: true,            // удаляет лишние поля
+            forbidNonWhitelisted: true, // ошибка при наличии лишних полей
+            transform: true,            // преобразует типы DTO
+        }),
+    );
+    app.useGlobalFilters(new HttpErrorFilter());
 
+    // Запуск сервера на всех интерфейсах
     await app.listen(port, '0.0.0.0');
-  console.log(`Application is running on: http://localhost:${port}`);
+    logger.info(`✅ Application is running on http://localhost:${port}`);
+    logger.info(`📊 Metrics available at http://localhost:${port}/metrics`);
 }
+
 bootstrap();

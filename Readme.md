@@ -60,5 +60,20 @@ POST    /products	(DTO validation)
 GET	/metrics	(Prometheus)
 GET	/api		(Swagger docs)
 
+CI: GitHub Actions
+Проект использует CI‑пайплайн на GitHub Actions для автоматической проверки кода:
+
+ Устанавливает зависимости (npm ci)
+
+ Прогоняет юнит‑тесты (npm run test)
+
+ Собирает проект (npm run build)
+
+ Строит Docker‑образ (опционально, для проверки сборки)
+
+Файл workflow: .github/workflows/ci.yml
+
+CI запускается при каждом push и pull request в ветку main.
+
 KorbenDallasFE
 

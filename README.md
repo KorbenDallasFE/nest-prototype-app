@@ -1,7 +1,7 @@
 # NestJS Prototype App
 
 ![CI](https://github.com/KorbenDallasFE/nest-prototype-app/actions/workflows/ci.yml/badge.svg)
-![Docker Pulls](https://img.shields.io/docker/pulls/tbgp/nest-prototype-app)
+![Docker Pulls](https://img.shields.io/docker/pulls/tbgp/nest-prototype-app?color=brightgreen)
 ![License](https://img.shields.io/github/license/KorbenDallasFE/nest-prototype-app)
 
 ## 📖 Описание

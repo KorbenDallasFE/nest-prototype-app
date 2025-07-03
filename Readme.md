@@ -25,44 +25,51 @@ Observability: Pino‑логгер, Prometheus‑метрики
 Swagger‑документация: http://localhost:3750/api
 
 Prometheus‑метрики: http://localhost:3750/metrics
-
+```
 ---
 
 ## 🚀 Быстрый старт
 
-```bash
 ### Локальный запуск
+```
 git clone https://github.com/KorbenDallasFE/nest-prototype-app.git
 cd nest‑prototype‑app
 npm install
 cp .env.example .env
 npm run start:dev
+```
 
 ### Запуск в Docker
+```
 docker build -t my‑app .
 docker run -d -p 4000:3750 my‑app
+```
 
 ### Конфигурация
+```
 Для работы проекта нужно настроить переменные окружения. 
 Для этого скопировать шаблон и указать значения:
 cp .env.example .env
+```
 
 Пример содержимого .env.example:
+```
 PORT=3750 
-
+```
 Порт запуска приложения в переменной PORT (3750 по умолчанию)
 
 Endpoints:
-
+```
 GET    /		(Hello World)
 GET    /products	(Auth token)
 POST   /products	(DTO validation)
-GET    /metrics	(Prometheus)
+GET    /metrics	        (Prometheus)
 GET    /api		(Swagger docs)
+```
 
 CI: GitHub Actions
 Проект использует CI‑пайплайн на GitHub Actions для автоматической проверки кода:
-
+```
  Устанавливает зависимости (npm ci)
 
  Прогоняет юнит‑тесты (npm run test)
@@ -70,10 +77,18 @@ CI: GitHub Actions
  Собирает проект (npm run build)
 
  Строит Docker‑образ (опционально, для проверки сборки)
-
-Файл workflow: .github/workflows/ci.yml
-
+```
+Файл workflow: 
+```
+.github/workflows/ci.yml
+```
 CI запускается при каждом push и pull request в ветку main.
 
+```
 KorbenDallasFE
+```
+
+## 📄 License
+
+This project is licensed under the MIT License — see the [LICENSE](./LICENSE) file for details.
 

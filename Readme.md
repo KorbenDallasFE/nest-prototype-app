@@ -9,7 +9,7 @@
 Этот проект — пример **NestJS**‑сервиса с CRUD‑ресурсом `products`, встроенными средствами **Observability** (Pino‑логи + Prometheus‑метрики) и возможностью упаковки в Docker.
 
 Технологии и архитектура проекта:
-
+```bash
 NestJS: модули, контроллеры, сервисы, DI, декораторы
 
 HTTP‑поток: Guard → Interceptor → Pipe → Controller → ExceptionFilter
@@ -39,24 +39,21 @@ cp .env.example .env
 npm run start:dev
 
 ### Запуск в Docker
-```bash
 docker build -t my‑app .
 docker run -d -p 4000:3750 my‑app
 
 ### Конфигурация
-```bash
 Для работы проекта нужно настроить переменные окружения. 
 Для этого скопировать шаблон и указать значения:
 cp .env.example .env
 
 Пример содержимого .env.example:
-```bash
 PORT=3750 
 
 Порт запуска приложения в переменной PORT (3750 по умолчанию)
 
 Endpoints:
-```bash
+
 GET    /		(Hello World)
 GET    /products	(Auth token)
 POST   /products	(DTO validation)
@@ -65,7 +62,7 @@ GET    /api		(Swagger docs)
 
 CI: GitHub Actions
 Проект использует CI‑пайплайн на GitHub Actions для автоматической проверки кода:
-```bash
+
  Устанавливает зависимости (npm ci)
 
  Прогоняет юнит‑тесты (npm run test)

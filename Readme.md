@@ -30,8 +30,8 @@ Prometheus‑метрики: http://localhost:3750/metrics
 
 ## 🚀 Быстрый старт
 
-### Локальный запуск
 ```bash
+### Локальный запуск
 git clone https://github.com/KorbenDallasFE/nest-prototype-app.git
 cd nest‑prototype‑app
 npm install
